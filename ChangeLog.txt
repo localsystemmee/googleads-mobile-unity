@@ -1,6 +1,16 @@
 Google Mobile Ads Unity Plugin Change Log
 
 **************
+Version Next
+**************
+
+Plugin:
+- Added support for GMA Android SDK v21. Requires using GMA Android SDK v21.0.0 or higher.
+
+Built and tested with:
+- Google Play services 21.0.0
+
+**************
 Version 7.0.0
 **************
 
