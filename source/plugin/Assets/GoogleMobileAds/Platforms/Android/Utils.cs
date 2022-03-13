@@ -37,9 +37,6 @@ namespace GoogleMobileAds.Android
 
         public const string AdSizeClassName = "com.google.android.gms.ads.AdSize";
 
-        public const string AdMobExtrasClassName =
-                "com.google.android.gms.ads.mediation.admob.AdMobExtras";
-
         public const string AppOpenAdClassName =
                 "com.google.android.gms.ads.appopen.AppOpenAd";
 
@@ -215,8 +212,7 @@ namespace GoogleMobileAds.Android
             // Makes ads that contain WebP ad assets ineligible.
             bundle.Call("putString", "adw", "true");
 
-            AndroidJavaObject extras = new AndroidJavaObject(AdMobExtrasClassName, bundle);
-            adRequestBuilder.Call<AndroidJavaObject>("addNetworkExtras", extras);
+            adRequestBuilder.Call<AndroidJavaObject>("addNetworkExtrasBundle", bundle);
 
             foreach (MediationExtras mediationExtra in request.MediationExtras)
             {
