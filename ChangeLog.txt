@@ -6,7 +6,8 @@ Version Next
 
 Plugin:
 - Updated HelloWorld sample scene UI to fit smaller devices.
-- Fixed Github issue [1943](https://github.com/googleads/googleads-mobile-unity/issues/1943)
+- Fixed Github issue [2003](https://github.com/googleads/googleads-mobile-unity/issues/2003).
+- Fixed Github issue [1943](https://github.com/googleads/googleads-mobile-unity/issues/1943).
 
 Sample:
 - Added logging for important ad events.

@@ -21,36 +21,52 @@ namespace GoogleMobileAds.iOS
     internal class AdErrorClient : IAdErrorClient
     {
         IntPtr error;
+        int code;
+        string domain;
+        string message;
+        string description;
+        AdErrorClient inner;
 
         public AdErrorClient(IntPtr error)
         {
             this.error = error;
+
+            // Because Native objects are weak references and may be released,
+            // we cache the members for use in case we access this object later.
+            this.code = Externs.GADUGetAdErrorCode(error);
+            this.domain = Externs.GADUGetAdErrorDomain(error);
+            this.message = Externs.GADUGetAdErrorMessage(error);
+            this.description = Externs.GADUGetAdErrorDescription(error);
+            IntPtr cause = Externs.GADUGetAdErrorUnderLyingError(error);
+            if (cause != IntPtr.Zero)
+            {
+              this.inner = new AdErrorClient(cause);
+            }
         }
 
         public int GetCode()
         {
-           return Externs.GADUGetAdErrorCode(error);
+           return code;
         }
 
         public string GetDomain()
         {
-            return Externs.GADUGetAdErrorDomain(error);
-
+            return domain;
         }
 
         public string GetMessage()
         {
-            return Externs.GADUGetAdErrorMessage(error);
+            return message;
         }
 
         public IAdErrorClient GetCause()
         {
-            return new AdErrorClient(Externs.GADUGetAdErrorUnderLyingError(error));
+            return inner;
         }
 
         public override string ToString()
         {
-            return Externs.GADUGetAdErrorDescription(error);
+            return description;
         }
     }
 }
